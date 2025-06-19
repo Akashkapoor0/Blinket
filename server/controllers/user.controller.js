@@ -1,3 +1,4 @@
+import sendEmail from "../config/sendEmail.js";
 import UserModel from "../models/user.model.js"
 import bcryptjs from "bcryptjs";
 
@@ -33,6 +34,12 @@ export async function registerUserController(request,response){
 
         const newUser = new UserModel(payload)
         const save = await newUser.save()
+
+        const verifyEmail = await sendEmail({
+            sendTo : email,
+            subject: "Verify email from Blinket"
+            html: 
+        })
 
     } catch (error) {
         return response.status(500).json({
